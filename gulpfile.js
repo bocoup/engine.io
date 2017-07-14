@@ -18,6 +18,7 @@ gulp.task('test', ['nsp', 'lint'], function () {
     .pipe(mocha({
       slow: 500,
       reporter: REPORTER,
+      noExit: true,
       bail: true
     }))
     .once('error', function (err) {

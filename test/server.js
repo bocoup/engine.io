@@ -1030,7 +1030,7 @@ describe('server', function () {
       });
     });
 
-    it('should close upgrading transport upon socket close', function (done) {
+    it.only('should close upgrading transport upon socket close', function (done) {
       var engine = listen(function (port) {
         engine.on('connection', function (conn) {
           conn.on('upgrading', function (transport) {
@@ -1040,6 +1040,10 @@ describe('server', function () {
         });
         eioc('ws://localhost:%d'.s(port));
       });
+      setTimeout(function () {
+        engine.close();
+        engine.httpServer().close();
+      }, 1000);
     });
 
     it('should close upgrading transport upon upgrade timeout', function (done) {
